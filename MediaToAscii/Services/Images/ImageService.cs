@@ -1,25 +1,19 @@
-﻿using OpenCvSharp;
+﻿using MediaToAscii.Configs;
+using OpenCvSharp;
 using System.Text;
 
 namespace MediaToAscii.Services.Images
 {
     internal class ImageService : IImageService
     {
-        int _asciiWidth;
-        int _asciiHeight;
-        string _symbols;
+        ImageConfig _imageConfig;
 
-        public ImageService()
-        {
-            _symbols = "#*@%=+*:-. ";
-            _asciiWidth = 100;
-            _asciiHeight = 50;
-        }
+        public ImageService(ImageConfig config) => _imageConfig = config;
 
         public string ImageToAscii(Mat image)
         {
             using var grayImage = image.CvtColor(ColorConversionCodes.BGR2GRAY);
-            using var resizedImage = grayImage.Resize(new Size(_asciiWidth, _asciiHeight));
+            using var resizedImage = grayImage.Resize(new Size(_imageConfig.Width, _imageConfig.Height));
 
             return ConvertToAscii(resizedImage);
         }
@@ -32,7 +26,7 @@ namespace MediaToAscii.Services.Images
                 throw new Exception("Wrong path. Press any key");
             }
 
-            using var resizedImage = grayImage.Resize(new Size(_asciiWidth, _asciiHeight));
+            using var resizedImage = grayImage.Resize(new Size(_imageConfig.Width, _imageConfig.Height));
 
             return ConvertToAscii(resizedImage);
         }
@@ -48,7 +42,7 @@ namespace MediaToAscii.Services.Images
                     var pixel = image.Get<Vec3b>(x, y);
 
                     int index = (pixel.Item0 * 10) / byte.MaxValue;
-                    builder.Append(_symbols[index]);
+                    builder.Append(_imageConfig.Symbols[index]);
                 }
 
                 builder.Append(Environment.NewLine);
