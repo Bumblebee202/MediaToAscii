@@ -26,6 +26,9 @@ namespace MediaToAscii.Menus
                 {
                     throw new Exception("Wrong path. Press any key");
                 }
+                Console.Clear();
+                Console.CursorVisible = false;
+
                 var ascii = _imageService.ImageToAscii(path);
 
                 Console.SetCursorPosition(0, 0);

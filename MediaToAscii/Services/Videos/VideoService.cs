@@ -20,6 +20,7 @@ namespace MediaToAscii.Services.Videos
 
             while (videoCapture.IsOpened())
             {
+                Console.CursorVisible = false;
                 if (cancellationToken.IsCancellationRequested)
                 {
                     return;

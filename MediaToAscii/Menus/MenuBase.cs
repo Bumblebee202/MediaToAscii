@@ -73,6 +73,7 @@
         {
             if (Items.Any())
             {
+                Console.Clear();
                 Items.ElementAt(_currentPosition).Show();
                 _currentPosition = 0;
             }

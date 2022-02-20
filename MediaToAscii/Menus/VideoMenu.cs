@@ -30,6 +30,7 @@ namespace MediaToAscii.Menus
                 {
                     throw new Exception("Wrong path. Press any key");
                 }
+                Console.Clear();
 
                 Task.Run(() => _videoService.VideoToAscii(path, token), token);
             }

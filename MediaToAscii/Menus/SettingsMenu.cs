@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MediaToAscii.Menus
+﻿namespace MediaToAscii.Menus
 {
-    internal class SettingsMenu
+    internal class SettingsMenu : MenuBase
     {
+
+        public SettingsMenu(IEnumerable<IMenu> items) : base(items)
+        {
+        }
+
+        public override string Name => "Settings";
     }
 }
