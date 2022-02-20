@@ -1,10 +1,5 @@
 ﻿using MediaToAscii.Services.Images;
 using OpenCvSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MediaToAscii.Services.Videos
 {
