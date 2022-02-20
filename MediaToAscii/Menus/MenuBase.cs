@@ -7,9 +7,6 @@
         public abstract string Name { get; }
         protected IEnumerable<IMenu> Items { get; set; }
 
-        protected virtual int Left => 50;
-        protected virtual int Top => 10;
-
         public MenuBase(IEnumerable<IMenu> items)
         {
             _exit = false;
@@ -26,6 +23,8 @@
 
                 Action();
             }
+
+            _exit = false;
         }
 
         protected virtual void DispayItems()
@@ -34,7 +33,7 @@
             {
                 var item = Items.ElementAt(index);
 
-                Console.SetCursorPosition(Left, Top + index);
+                Console.SetCursorPosition(0, 0 + index);
 
                 if (index == _currentPosition)
                 {
@@ -52,15 +51,30 @@
             var key = Console.ReadKey().Key;
             switch (key)
             {
-                case ConsoleKey.Escape: 
-                    _exit = true;
+                case ConsoleKey.Escape:
+                    Exit();
                     break;
-                case ConsoleKey.Enter: 
-                    Items.ElementAt(_currentPosition).Show();
+                case ConsoleKey.Enter:
+                    ShowItem();
                     break;
                 default:
                     Move(key);
                     break;
+            }
+        }
+
+        protected virtual void Exit()
+        {
+            _exit = true;
+            Console.Clear();
+            Console.CursorVisible = false;
+        }
+
+        protected virtual void ShowItem()
+        {
+            if (Items.Any())
+            {
+                Items.ElementAt(_currentPosition).Show();
             }
         }
 
