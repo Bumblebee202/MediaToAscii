@@ -24,7 +24,7 @@
                 Console.CursorVisible = false;
                 DispayItems();
 
-                Move();
+                Action();
             }
         }
 
@@ -47,22 +47,25 @@
             }
         }
 
-        protected virtual void Move()
+        protected virtual void Action()
         {
             var key = Console.ReadKey().Key;
-            if (key == ConsoleKey.Escape)
+            switch (key)
             {
-                _exit = true;
-                return;
+                case ConsoleKey.Escape: 
+                    _exit = true;
+                    break;
+                case ConsoleKey.Enter: 
+                    Items.ElementAt(_currentPosition).Show();
+                    break;
+                default:
+                    Move(key);
+                    break;
             }
-            else if (key == ConsoleKey.Enter)
-            {
-                Items.ElementAt(_currentPosition)
-                     .Show();
+        }
 
-                return;
-            }
-
+        protected virtual void Move(ConsoleKey key)
+        {
             _currentPosition += key switch
             {
                 ConsoleKey.UpArrow when _currentPosition > 0 => -1,
