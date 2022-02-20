@@ -2,6 +2,6 @@
 {
     internal interface IVideoService
     {
-        void VideoToAscii(string path);
+        void VideoToAscii(string path, CancellationToken cancellationToken);
     }
 }

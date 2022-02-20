@@ -14,12 +14,17 @@ namespace MediaToAscii.Services.Videos
             _imageService = imageService;
         }
 
-        public void VideoToAscii(string path)
+        public void VideoToAscii(string path, CancellationToken cancellationToken)
         {
             using var videoCapture = new VideoCapture(path);
 
             while (videoCapture.IsOpened())
             {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return;
+                }
+
                 Console.SetCursorPosition(0, 0);
 
                 using var image = new Mat();

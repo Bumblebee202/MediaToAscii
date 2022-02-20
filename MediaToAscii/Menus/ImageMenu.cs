@@ -1,9 +1,4 @@
 ﻿using MediaToAscii.Services.Images;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MediaToAscii.Menus
 {
@@ -16,7 +11,7 @@ namespace MediaToAscii.Menus
             _imageService = imageService;
         }
 
-        public override string Name => "Image";
+        public override string Name => "Show image";
 
         protected override void DispayItems()
         {
@@ -42,6 +37,6 @@ namespace MediaToAscii.Menus
             }
         }
 
-        protected override void ShowItem() => Exit();
+        protected override void Enter() => Exit();
     }
 }

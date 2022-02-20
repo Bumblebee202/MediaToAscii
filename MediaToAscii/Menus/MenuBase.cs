@@ -33,14 +33,13 @@
             {
                 var item = Items.ElementAt(index);
 
-                Console.SetCursorPosition(0, 0 + index);
-
                 if (index == _currentPosition)
                 {
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.BackgroundColor = ConsoleColor.Gray;
                 }
 
+                Console.SetCursorPosition(0, 0 + index);
                 Console.Write(item.Name);
                 Console.ResetColor();
             }
@@ -55,7 +54,7 @@
                     Exit();
                     break;
                 case ConsoleKey.Enter:
-                    ShowItem();
+                    Enter();
                     break;
                 default:
                     Move(key);
@@ -70,11 +69,12 @@
             Console.CursorVisible = false;
         }
 
-        protected virtual void ShowItem()
+        protected virtual void Enter()
         {
             if (Items.Any())
             {
                 Items.ElementAt(_currentPosition).Show();
+                _currentPosition = 0;
             }
         }
 

@@ -9,11 +9,13 @@ var serviceProvider = new ServiceCollection()
     .AddSingleton<IVideoService, VideoService>()
     .AddSingleton<ExitMenu>()
     .AddSingleton<ImageMenu>()
+    .AddSingleton<VideoMenu>()
     .AddSingleton(provider =>
     {
         var exitMenu = provider.GetRequiredService<ExitMenu>();
         var imageMenu = provider.GetRequiredService<ImageMenu>();
-        var items = new IMenu[] { imageMenu, exitMenu };
+        var videoMenu = provider.GetRequiredService<VideoMenu>();
+        var items = new IMenu[] { imageMenu, videoMenu, exitMenu };
         return new MainMenu(items);
     })
     .BuildServiceProvider();
