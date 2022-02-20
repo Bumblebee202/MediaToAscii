@@ -20,9 +20,6 @@ namespace MediaToAscii.Menus
             {
                 _cancellationTokenSource = new CancellationTokenSource();
                 var token = _cancellationTokenSource.Token;
-                token.Register(() =>
-                {
-                });
 
                 Console.Clear();
                 Console.CursorVisible = true;
