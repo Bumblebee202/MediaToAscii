@@ -3,6 +3,6 @@
     internal interface IMenu
     {
         string Name { get; }
-        void Show();
+        void Open();
     }
 }

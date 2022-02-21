@@ -46,4 +46,4 @@ var serviceProvider = new ServiceCollection()
     .BuildServiceProvider();
 
 var mainMenu = serviceProvider.GetRequiredService<MainMenu>();
-mainMenu.Show();
+mainMenu.Open();

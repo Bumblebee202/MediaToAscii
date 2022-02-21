@@ -13,10 +13,11 @@ namespace MediaToAscii.Menus
 
         public override string Name => "Show image";
 
-        protected override void DispayItems()
+        public override void Open()
         {
             try
             {
+                Console.ResetColor();
                 Console.Clear();
                 Console.CursorVisible = true;
 
@@ -33,10 +34,19 @@ namespace MediaToAscii.Menus
 
                 Console.SetCursorPosition(0, 0);
                 Console.WriteLine(ascii);
+
+                while (!_exit)
+                {
+                    Action();
+                }
+
+                _exit = false;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                Console.ReadKey();
+                Console.Clear();
             }
         }
 

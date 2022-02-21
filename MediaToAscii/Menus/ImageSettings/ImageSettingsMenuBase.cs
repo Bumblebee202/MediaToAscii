@@ -12,19 +12,21 @@ namespace MediaToAscii.Menus.ImageSettings
             _imageConfigService = imageConfigService;
         }
 
-        public override void Show()
+        public override void Open()
         {
+            Console.ResetColor();
             Console.Clear();
             Console.CursorVisible = true;
 
-            DispayItems();
+            SetValue();
 
+            Console.ResetColor();
             Console.Clear();
             Console.CursorVisible = false;
             Console.SetCursorPosition(0, 0);
         }
 
-        protected override void DispayItems()
+        protected virtual void SetValue()
         {
             while (true)
             {

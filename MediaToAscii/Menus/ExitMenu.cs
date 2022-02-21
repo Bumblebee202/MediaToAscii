@@ -9,6 +9,10 @@
 
         public override string Name => "Exit";
 
-        public override void Show() => Environment.Exit(0);
+        public override void Open()
+        {
+            Console.ResetColor();
+            Environment.Exit(0);
+        }
     }
 }

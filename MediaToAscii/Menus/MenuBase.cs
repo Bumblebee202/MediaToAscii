@@ -14,8 +14,11 @@
             Items = items ?? Enumerable.Empty<IMenu>();
         }
 
-        public virtual void Show()
+        public virtual void Open()
         {
+            Console.ResetColor();
+            Console.Clear();
+
             while (!_exit)
             {
                 Console.CursorVisible = false;
@@ -31,6 +34,7 @@
         {
             for (int index = 0; index < Items.Count(); index++)
             {
+                Console.ResetColor();
                 var item = Items.ElementAt(index);
 
                 if (index == _currentPosition)
@@ -41,7 +45,6 @@
 
                 Console.SetCursorPosition(0, 0 + index);
                 Console.Write(item.Name);
-                Console.ResetColor();
             }
         }
 
@@ -64,17 +67,19 @@
 
         protected virtual void Exit()
         {
+            _currentPosition = 0;
             _exit = true;
+            Console.ResetColor();
             Console.Clear();
             Console.CursorVisible = false;
+            Console.SetCursorPosition(0, 0);
         }
 
         protected virtual void Enter()
         {
             if (Items.Any())
             {
-                Console.Clear();
-                Items.ElementAt(_currentPosition).Show();
+                Items.ElementAt(_currentPosition).Open();
                 _currentPosition = 0;
             }
         }

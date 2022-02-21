@@ -14,13 +14,14 @@ namespace MediaToAscii.Menus
 
         public override string Name => "Show video";
 
-        protected override void DispayItems()
+        public override void Open()
         {
             try
             {
                 _cancellationTokenSource = new CancellationTokenSource();
                 var token = _cancellationTokenSource.Token;
 
+                Console.ResetColor();
                 Console.Clear();
                 Console.CursorVisible = true;
 
@@ -32,12 +33,26 @@ namespace MediaToAscii.Menus
                 }
                 Console.Clear();
 
-                Task.Run(() => _videoService.VideoToAscii(path, token), token);
+                var task = Task.Run(() => _videoService.VideoToAscii(path, token), token);
+
+                while (!_exit)
+                {
+                    Action();
+                }
+
+                _exit = false;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
+                Action();
             }
+        }
+
+        protected override void Action()
+        {
+            Console.ReadKey();
+            Exit();
         }
 
         protected override void Exit()
